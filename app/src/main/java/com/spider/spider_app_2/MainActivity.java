@@ -7,11 +7,11 @@ import android.hardware.SensorManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.CountDownTimer;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
@@ -21,10 +21,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor sen;
     TextView text;
     TextView text2;
+    TextView text3;
 
     Uri notification;
     Ringtone r;
-    int timee =10;
+
 
 
 
@@ -44,11 +45,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
          text = (TextView) findViewById(R.id.text1);
         text2 = (TextView) findViewById(R.id.text2);
+        text3 = (TextView) findViewById(R.id.text3);
 
         senman = (SensorManager) getSystemService(SENSOR_SERVICE);
         sen = senman.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
-        notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         r = RingtoneManager.getRingtone(getApplicationContext(),notification);
 
 
@@ -120,9 +122,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         }
-        else
+        else {
 
             text.setText("Far");
+            text3.setText("(If near,will be alarmed in 10_secs)");
+            r.stop();
+        }
+
 
 
 
